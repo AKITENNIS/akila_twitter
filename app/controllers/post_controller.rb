@@ -1,5 +1,5 @@
 class PostController < ApplicationController
-
+  before_action :authenticate_current_user,only: [:edit,:destroy]
   def show
     @post=Post.find_by(params[:id])
     render "show"
@@ -47,5 +47,12 @@ class PostController < ApplicationController
 
   def favorite_user
     @post=Post.find(params[:id])
+  end
+
+  private
+  def authenticate_current_user
+    if params[:id] != current_user.id then
+      redirect_to controller: :post, action: :index
+    end
   end
 end
