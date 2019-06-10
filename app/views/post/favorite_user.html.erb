@@ -1,0 +1,6 @@
+<p>ファボした人</p>
+<%@post.favorite.each do |list|%>
+  <%=list.user.name%>
+  <br>
+<%end%>
+<%= link_to "投稿一覧", "/post/index"%>
