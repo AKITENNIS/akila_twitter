@@ -1,13 +1,18 @@
-<p>ユーザー一覧</p>
-<%@users.each do |user|%>
-  <%=link_to user.name ,"/user/#{user.id}/show"%>
-  <%if !Follow.find_by(follow_user_id:current_user.id,followed_user_id:user.id) then%>
+<% @users.each do |user| %>
+  <div class="akitennisclass1831">
+    <div class="panel akitennisclass982">
+      <div class="akitennisclass1502">
+        <div class="akitennisclass1291">
+          <%= link_to user.name, "/user/#{user.id}/show", class: "btn akitennisclass1316 akitennisclass1620" %>
+        </div>
+        <hr>
+        <p>
+          <a href="users/2">
+            <span><img alt="くろちゃんｄｓ" class="akitennisclass854 akitennisclass1176 imageSvg" data-image-style="SQ_L" data-image-svg="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-1-07719804a5aff45be3905f19fec5b4a8.svg" data-image-svgz="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-1-6fa9aa9ae560b83e57264fcaab133399.svgz" height="220" show_rank="false" src="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-1-6fa9aa9ae560b83e57264fcaab133399.svgz" title="くろちゃんｄｓ" width="220"></span>
+          </a> <br>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-    <%= link_to "フォローする", "/user/#{user.id}/do_follow"%>
-  <%else%>
-    <%= link_to "フォローを外す", "/user/#{user.id}/remove_follow"%>
-  <%end%>
-  <br><br>
-<%end%>
-
-<%= link_to "投稿一覧", "/post/index"%>

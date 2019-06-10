@@ -1,13 +1,109 @@
-名前 　　<%=@user.name%> <br>
-<%if !Follow.find_by(follow_user_id:current_user.id,followed_user_id:@user.id) then%>
-  <%= link_to "フォローする", "/user/#{@user.id}/do_follow"%>
-<%else%>
-  <%= link_to "フォローを外す", "/user/#{@user.id}/remove_follow"%>
-<%end%>
-<br><br>
+<div class="akitennisclass1847" role="main">
 
-<%= link_to "フォロー一覧", "/user/#{@user.id}/following"%>
-<%= link_to "フォロワー一覧", "/user/#{@user.id}/followed"%> <br><br>
+<% if @user == current_user %>
+  <h1 class="akitennisclass1137">マイページ</h1>
+  <p>あなたのすべての投稿が見れます！</p>
 
-<%= link_to "ユーザー一覧", "/user/index"%> <br>
-<%= link_to "投稿一覧", "/post/index"%>
+  <!-- MainContent -->
+  <%= form_tag("/post/create", method: :post, class: "new_content_comment", id: "comment_form") do %>
+
+    <div style="display:none">
+      <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k0tPgtHEk5ruAunyEF/65Dfh/LCXhgYs77fMPOnXGes=">
+    </div>
+    <div class="panel akitennisclass982">
+      <div class="akitennisclass987">
+        <ul class="akitennisclass1306 akitennisclass1290">
+          <li>
+            <span class="label akitennisclass1036">どんどんつぶやこう！！</span>
+          </li>
+
+        </ul>
+      </div>
+      <div class="akitennisclass1502">
+        <div class="uploadedImage">
+
+        </div>
+        <div class="uploadedVideo">
+
+        </div>
+        <div class="uploadedTwitter"></div>
+        <div class="uploadedFacebook"></div>
+
+
+        <p>
+          <%= text_field_tag :content, "", class: "autoResizeable charCountable akitennisclass1200", id: "content_comment_body", style: "min-height: 3em; max-height: 250px; overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 66px;" %>
+        </p>
+        <div class="akitennisclass1926">
+          <p class="akitennisclass1539 akitennisclass1766 akitennisclass2320">たったの<b class="charCounterLimit">２０分</b>で<span class="akitennisclass1238"><b class="charCounter">ツイッターアプリ</b></span>ができる！！
+          </p>
+          <%= submit_tag "つぶやく", class: "btn akitennisclass1316 akitennisclass1531 gaEventTrackableWithConfirm aaEventTrackableWithConfirm" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% else %>
+    <h1 class="akitennisclass1137"><%= @user.name %>さんのページ</h1>
+    <p><%= @user.name %>さんのすべての投稿が見れます！</p>
+
+<% end %>
+
+  <div class="panel akitennisclass982">
+    <!-- activities -->
+    <div id="activities" class="akitennisclass1504">
+      <% @posts.each do |post| %>
+        <div class="activity-item akitennisclass686" data-activity-id="600114172" id="activity-600114172">
+          <%= link_to "/home/#{post.id}/show" do %>
+
+            <div class="akitennisclass1926">
+              <div class="activityBody media">
+                <p class="akitennisclass1507">
+                      <span><img alt="マイネ王 運営事務局" data-container="body" data-link-url="http://king.mineo.jp/my/kopt" data-placement="bottom" data-toggle="tooltip" height="40" show_rank="false" src="https://img.king.mineo.jp/system/sns_profiles/badge_images/000/000/000/017/SQ_XS_image.jpg?1449639783" title="" width="40" data-original-title="マイネ王 運営事務局">
+                        <br>                    by<%= User.find_by(id: post.user_id).name %>
+                </p>
+
+                <p class="akitennisclass1507">
+                </p>
+                <div class="akitennisclass110 akitennisclass1508">
+                  <div class="akitennisclass1001 akitennisclass1577">
+                    <%= post.content %>
+                  </div>
+                </div>
+
+                <div class="akitennisclass1766">
+                  <%= link_to post_favorite_path(post.id, user_id: current_user.id), class: "btn akitennisclass1857 akitennisclass2312", method: :put do %>
+                    <i class="fa fa-heart"></i>
+                    いいね
+                    <span class="badge"><%= Favorite.where(post_id: post.id).count %></span>
+                  <% end %>
+                  <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
+                            <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
+                                  <%= link_to "/home/#{post.id}/destroy", style: "color:grey; margin-left:10px;", method: "delete" do %>
+                              <i class="fa fa-trash"></i>削除
+                            <% end %>
+                  </div>
+                  <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
+                            <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
+                                  <%= link_to "/home/#{post.id}/edit" do %>
+                              <i class="fa fa-pen"></i>編集
+                            <% end %>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          <% end %>
+
+        </div>
+
+      <% end %>
+    </div>
+    <!-- /activities -->
+  </div>
+
+  <div id="morePager">
+    <p class="hide akitennisclass1302">これ以上ありません。</p>
+
+  </div>
+</div>
+

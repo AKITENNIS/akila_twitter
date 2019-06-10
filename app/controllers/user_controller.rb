@@ -2,10 +2,12 @@ class UserController < ApplicationController
   before_action :set_user,except: [:index]
 
   def show
+    @posts=Post.where(user_id:@user.id)
   end
 
   def index
     @users=User.all
+    @posts=Post.where(user_id:current_user)
   end
 
   def following

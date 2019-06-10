@@ -1,21 +1,69 @@
-<%@posts.each do |post| %>
-  <p>
-    <%=post.id%> <%=link_to post.content ,"/post/#{post.id}/show"%>　by<%=link_to post.user.name ,"/user/#{post.user.id}/show"%>
-    <%if Favorite.find_by(user_id:current_user.id,post_id:post.id) then%>
-      <%= link_to "いいねを取り消す",post_remove_favorite_path(post.id,user_id: current_user.id),method: :delete%>
-    <%else%>
-      <%= link_to "いいね",post_favorite_path(post.id,user_id: current_user.id),method: :put%>
-    <%end%>
-    <%=link_to "いいねした人" ,"/post/#{post.id}/favorite_user"%>
-    <%=Favorite.where(post_id:post.id).count%>
-    <%if post.user == current_user%>
-      <%= link_to "編集", "/post/#{post.id}/edit"%>
-      <%= link_to "削除", "/post/#{post.id}/destroy",method: :delete%>
-    <%end%>
-  </p>
-<%end%>
 
-<%= link_to "投稿", "/post/new"%>
 
-<%= link_to "ユーザー一覧", "/user/index"%>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+<div class="akitennisclass1847" role="main">
+  <h1 class="akitennisclass1137">タイムライン</h1>
+  <p>フォローしてるユーザーの新着投稿が見れます！</p>
+  <div class="panel akitennisclass982">
+    <!-- activities -->
+    <div id="activities" class="akitennisclass1504">
+      <% @posts.each do |post| %>
+        <div class="activity-item akitennisclass686" data-activity-id="600114172" id="activity-600114172">
+          <%= link_to "/user/#{post.id}/show" do %>
+
+            <div class="akitennisclass1926">
+              <div class="activityBody media">
+                <p class="akitennisclass1507">
+                      <span><img alt="マイネ王 運営事務局" data-container="body" data-link-url="http://king.mineo.jp/my/kopt" data-placement="bottom" data-toggle="tooltip" height="40" show_rank="false" src="https://img.king.mineo.jp/system/sns_profiles/badge_images/000/000/000/017/SQ_XS_image.jpg?1449639783" title="" width="40" data-original-title="マイネ王 運営事務局">
+                        <br>                    by<%= User.find_by(id: post.user_id).name %>
+                </p>
+                <p class="akitennisclass1507">
+                </p>
+                <div class="akitennisclass110 akitennisclass1508">
+                  <div class="akitennisclass1001 akitennisclass1577">
+                    <%= post.content %>
+                  </div>
+                </div>
+                <div class="akitennisclass1766">
+                  <%if Favorite.find_by(user_id:current_user.id,post_id:post.id) then%>
+                    <%= link_to post_remove_favorite_path(post.id,user_id: current_user.id),method: "delete", class: "btn akitennisclass1857 akitennisclass2312" do %>
+                      <i class="fa fa-heart"></i>
+                      取り消し
+                      <span class="badge"><%= Favorite.where(post_id: post.id).count %></span>
+                    <% end %>
+                  <%else%>
+
+                <%= link_to post_favorite_path(post.id, user_id: current_user.id), class: "btn akitennisclass1857 akitennisclass2312", method: :put do %>
+                    <i class="fa fa-heart"></i>
+                    いいね
+                    <span class="badge"><%= Favorite.where(post_id: post.id).count %></span>
+                  <% end %>
+                  <%end%>
+
+                  <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
+                            <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
+                                  <%= link_to "/post/#{post.id}/destroy", style: "color:grey; margin-left:10px;", method: "delete" do %>
+                              <i class="fa fa-trash"></i>削除
+                            <% end %>
+                  </div>
+                  <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
+                            <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
+                                  <%= link_to "/post/#{post.id}/edit" do %>
+                              <i class="fa fa-pen"></i>編集
+                            <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <!-- /activities -->
+  </div>
+  <div id="morePager">
+    <p class="hide akitennisclass1302">これ以上ありません。</p>
+  </div>
+</div>
+
+

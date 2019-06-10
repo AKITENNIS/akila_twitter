@@ -1,5 +1,6 @@
 class PostController < ApplicationController
-  before_action :authenticate_current_user,only: [:edit,:destroy]
+  before_action :authenticate_current_user
+
   def show
     @post=Post.find_by(params[:id])
     render "show"
@@ -15,6 +16,8 @@ class PostController < ApplicationController
   end
 
   def index
+    @user = current_user
+
     @posts=Post.all.follow_post(current_user)
     render "index"
   end
@@ -50,8 +53,11 @@ class PostController < ApplicationController
   end
 
   private
+
   def authenticate_current_user
-    if params[:id] != current_user.id then
+    if current_user
+      @user = current_user
+    else
       redirect_to controller: :post, action: :index
     end
   end
