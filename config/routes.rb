@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   put 'home/:id/update' =>'home#update'
   delete 'home/:id/destroy' =>'home#destroy'
   put 'home/:id/favorite' => 'home#favorite',as: 'home_favorite'
+  get 'users/:id' => 'users#show'
+
 end

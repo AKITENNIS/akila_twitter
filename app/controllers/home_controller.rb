@@ -21,6 +21,7 @@ class HomeController < ApplicationController
 
 
   def edit
+    @posts=Post.all
     @post=Post.find_by(id:params[:id])
     render "edit"
   end

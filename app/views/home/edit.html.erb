@@ -1,4 +1,43 @@
-<%= form_tag("/home/#{@post.id}/update", method: :put) do %>
-  <%= text_field_tag :content,@post.content%>
-  <%= submit_tag "編集" %>
-<% end %>
+<div class="akitennisclass1847" >
+
+  <%= form_tag("/home/#{@post.id}/update", method: :put, class: "new_content_comment", id: "comment_form") do %>
+    <div style="display:none">
+      <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k0tPgtHEk5ruAunyEF/65Dfh/LCXhgYs77fMPOnXGes=">
+    </div>
+    <div class="panel akitennisclass982">
+
+      <input class="imageId" id="content_comment_up_image_id" name="content_comment[up_image_id]" type="hidden">
+      <input class="videoUrl" id="content_comment_video_url" name="content_comment[video_url]" type="hidden">
+      <input class="twitterUrl" id="content_comment_twitter_url" name="content_comment[twitter_url]" type="hidden">
+      <input class="facebookUrl" id="content_comment_facebook_url" name="content_comment[facebook_url]" type="hidden">
+      <div class="akitennisclass987">
+        <ul class="akitennisclass1306 akitennisclass1290">
+          <li>
+            <span class="label akitennisclass1036">このつぶやきを編集しましょう！</span>
+          </li>
+
+        </ul>
+      </div>
+      <div class="akitennisclass1502">
+        <div class="uploadedImage">
+
+        </div>
+        <div class="uploadedVideo">
+
+        </div>
+        <div class="uploadedTwitter"></div>
+        <div class="uploadedFacebook"></div>
+
+
+        <p>
+          <%= text_field_tag :content, @post.content, class: "autoResizeable charCountable akitennisclass1200", id: "content_comment_body", style: "min-height: 3em; max-height: 250px; overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 66px;" %>
+        </p>
+        <div class="akitennisclass1926">
+          <p class="akitennisclass1539 akitennisclass1766 akitennisclass2320">たったの<b class="charCounterLimit">２０分</b>で<span class="akitennisclass1238"><b class="charCounter">ツイッターアプリ</b></span>ができる！！
+          </p>
+          <%= submit_tag "編集", class: "btn akitennisclass1316 akitennisclass1531 gaEventTrackableWithConfirm aaEventTrackableWithConfirm" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
