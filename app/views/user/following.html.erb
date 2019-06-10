@@ -1,0 +1,7 @@
+<p><%=@user.name%>さんのフォロー一覧</p>
+<%@user.follow.each do |list|%>
+  <%=list.followed_user.name%>
+<%end%>
+<br><br>
+<%= link_to "ユーザーに戻る", "/user/#{@user.id}/show"%> <br>
+<%= link_to "投稿一覧", "/post/index"%>
