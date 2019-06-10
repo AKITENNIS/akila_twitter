@@ -1,0 +1,13 @@
+<p>ユーザー一覧</p>
+<%@users.each do |user|%>
+  <%=link_to user.name ,"/user/#{user.id}/show"%>
+  <%if !Follow.find_by(follow_user_id:current_user.id,followed_user_id:user.id) then%>
+
+    <%= link_to "フォローする", "/user/#{user.id}/do_follow"%>
+  <%else%>
+    <%= link_to "フォローを外す", "/user/#{user.id}/remove_follow"%>
+  <%end%>
+  <br><br>
+<%end%>
+
+<%= link_to "投稿一覧", "/post/index"%>

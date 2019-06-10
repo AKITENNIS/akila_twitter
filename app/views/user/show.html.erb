@@ -1,0 +1,13 @@
+名前 　　<%=@user.name%> <br>
+<%if !Follow.find_by(follow_user_id:current_user.id,followed_user_id:@user.id) then%>
+  <%= link_to "フォローする", "/user/#{@user.id}/do_follow"%>
+<%else%>
+  <%= link_to "フォローを外す", "/user/#{@user.id}/remove_follow"%>
+<%end%>
+<br><br>
+
+<%= link_to "フォロー一覧", "/user/#{@user.id}/following"%>
+<%= link_to "フォロワー一覧", "/user/#{@user.id}/followed"%> <br><br>
+
+<%= link_to "ユーザー一覧", "/user/index"%> <br>
+<%= link_to "投稿一覧", "/post/index"%>
