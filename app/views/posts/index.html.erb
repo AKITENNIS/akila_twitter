@@ -9,7 +9,7 @@
     <div id="activities" class="akitennisclass1504">
       <% @posts.each do |post| %>
         <div class="activity-item akitennisclass686" data-activity-id="600114172" id="activity-600114172">
-          <%= link_to "/user/#{post.id}/show" do %>
+          <%= link_to "/users/#{post.id}/show" do %>
 
             <div class="akitennisclass1926">
               <div class="activityBody media">
@@ -42,13 +42,13 @@
 
                   <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
                             <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
-                                  <%= link_to "/post/#{post.id}/destroy", style: "color:grey; margin-left:10px;", method: "delete" do %>
+                                  <%= link_to "/posts/#{post.id}/destroy", style: "color:grey; margin-left:10px;", method: "delete" do %>
                               <i class="fa fa-trash"></i>削除
                             <% end %>
                   </div>
                   <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
                             <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
-                                  <%= link_to "/post/#{post.id}/edit" do %>
+                                  <%= link_to "/posts/#{post.id}/edit" do %>
                               <i class="fa fa-pen"></i>編集
                             <% end %>
                   </div>

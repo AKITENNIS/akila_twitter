@@ -1,17 +1,17 @@
 <div class="akitennisclass1847" role="main">
-  <!-- MainContent -->
 
-
-  <h1 class="akitennisclass1137">マイページ</h1>
-  <p>あなたのすべての投稿が見れます！</p>
+  <% if @user == current_user %>
+    <h1 class="akitennisclass1137">マイページ</h1>
+    <p>あなたのすべての投稿が見れます！</p>
 
     <!-- MainContent -->
-    <%= form_tag("/post/create", method: :post, class: "new_content_comment", id: "comment_form") do %>
+    <%= form_tag("/posts/create", method: :post, class: "new_content_comment", id: "comment_form") do %>
+
       <div style="display:none">
         <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k0tPgtHEk5ruAunyEF/65Dfh/LCXhgYs77fMPOnXGes=">
       </div>
       <div class="panel akitennisclass982">
-     <div class="akitennisclass987">
+        <div class="akitennisclass987">
           <ul class="akitennisclass1306 akitennisclass1290">
             <li>
               <span class="label akitennisclass1036">どんどんつぶやこう！！</span>
@@ -41,6 +41,11 @@
         </div>
       </div>
     <% end %>
+  <% else %>
+    <h1 class="akitennisclass1137"><%= @user.name %>さんのページ</h1>
+    <p><%= @user.name %>さんのすべての投稿が見れます！</p>
+
+  <% end %>
 
   <div class="panel akitennisclass982">
     <!-- activities -->
@@ -65,7 +70,7 @@
                 </div>
 
                 <div class="akitennisclass1766">
-                  <%= link_to home_favorite_path(post.id, user_id: current_user.id), class: "btn akitennisclass1857 akitennisclass2312", method: :put do %>
+                  <%= link_to post_favorite_path(post.id, user_id: current_user.id), class: "btn akitennisclass1857 akitennisclass2312", method: :put do %>
                     <i class="fa fa-heart"></i>
                     いいね
                     <span class="badge"><%= Favorite.where(post_id: post.id).count %></span>

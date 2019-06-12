@@ -1,4 +1,4 @@
-class PostController < ApplicationController
+class PostsController < ApplicationController
   before_action :authenticate_current_user
 
   def show
@@ -12,7 +12,7 @@ class PostController < ApplicationController
 
   def create
     Post.create!(content:params[:content],user_id:current_user.id)
-    redirect_to controller: :post, action: :index
+    redirect_to controller: :posts, action: :index
   end
 
   def index
@@ -30,22 +30,22 @@ class PostController < ApplicationController
 
   def update
     Post.find_by(id:params[:id]).update!(content:params[:content])
-    redirect_to controller: :post, action: :index
+    redirect_to controller: :posts, action: :index
   end
 
   def destroy
     Post.find_by(id:params[:id]).destroy!
-    redirect_to controller: :post, action: :index
+    redirect_to controller: :posts, action: :index
   end
 
   def favorite
     Favorite.create!(user_id:params[:user_id],post_id:params[:id])
-    redirect_to controller: :post, action: :index
+    redirect_to controller: :posts, action: :index
   end
 
   def remove_favorite
     Favorite.find_by(user_id:params[:user_id],post_id:params[:id]).destroy!
-    redirect_to controller: :post, action: :index
+    redirect_to controller: :posts, action: :index
   end
 
   def favorite_user
@@ -58,7 +58,7 @@ class PostController < ApplicationController
     if current_user
       @user = current_user
     else
-      redirect_to controller: :post, action: :index
+      redirect_to controller: :posts, action: :index
     end
   end
 end
