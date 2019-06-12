@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>掲示板デザイン</title>
+  <title>Twitterデザイン</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -110,14 +110,14 @@
         </p>
         <p>
           <%= link_to "users/#{current_user.id}" do %>
-            <span><img alt="くろちゃんｄｓ" class="akitennisclass854 akitennisclass1176 imageSvg" data-image-style="SQ_L" data-image-svg="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-1-07719804a5aff45be3905f19fec5b4a8.svg" data-image-svgz="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-1-6fa9aa9ae560b83e57264fcaab133399.svgz" height="220" show_rank="false" src="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-1-6fa9aa9ae560b83e57264fcaab133399.svgz" title="くろちゃんｄｓ" width="220"></span>
+            <span><img alt="くろちゃんｄｓ" class="akitennisclass854 akitennisclass1176 imageSvg"  height="220" show_rank="false" src="/assets/1.png" title="くろちゃんｄｓ" width="220"></span>
           <% end %>
           <br>
-          <% if @user.present? %>
+          <% if @user.present? && @user != current_user %>
           <%if !Follow.find_by(follow_user_id:current_user.id,followed_user_id:@user.id) then%>
-            <%= link_to "フォローする", "/user/#{@user.id}/do_follow", class: "btn akitennisclass1316 akitennisclass1620" %>
+            <%= link_to "フォローする", "/user/#{@user.id}/do_follow", class: "btn akitennisclass1316 akitennisclass1620",method: :post %>
           <%else%>
-            <%= link_to "フォローを外す", "/user/#{@user.id}/remove_follow", class: "btn akitennisclass1313 akitennisclass1620"%>
+            <%= link_to "フォローを外す", "/user/#{@user.id}/remove_follow", class: "btn akitennisclass1313 akitennisclass1620",method: :post%>
             <%end%>
           <%end%>
         </p>
@@ -130,68 +130,27 @@
         <b>フォロー</b>
         <small class="akitennisclass1539"><b></b></small>
       </div>
-      <div class="akitennisclass1502">
-        <% @posts.each do |post| %>
-          <%= link_to "/post/#{post.id}/show" do %>
+     <div class="akitennisclass1502">
+        <% @follow.each do |user| %>
+          <%= link_to "/user/#{user.id}/show" do %>
 
             <div class="akitennisclass1292 akitennisclass2594">
               <div class="akitennisclass1766">
-                <a href="" title="John Isle"><span><img alt="John Isle" class="imageSvg" data-container="body" data-image-svg="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-2-0b4167a2e7ec2facd7b3f3f6ee99f93f.svg" data-image-svgz="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-2-5f187c1b472a9dcd1043a640b66daf18.svgz" data-placement="bottom" data-toggle="tooltip" height="60" show_rank="true" src="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-2-5f187c1b472a9dcd1043a640b66daf18.svgz" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span></a>
+                <a href="" title="John Isle"><span><img alt="John Isle" class="imageSvg" height="60" show_rank="true" src="/assets/1.png" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span></a>
               </div>
               <div class="akitennisclass1764">
-                <div class="popover right show">
-                  <div class="arrow"></div>
-                  <div class="popover-content">
-                    <div class="akitennisclass1291 akitennisclass1926">
-                      <div class="akitennisclass313 akitennisclass1766 akitennisclass1853">
-                        <b class="akitennisclass1539">
-                          <a href="" title="John Isle">
+                <a href="" title="John Isle">
                               <span class="label akitennisclass1035" style="margin-right: 5px;">
-                                ユーザー名</span><%= User.find_by(id: post.user_id).name %>
-                          </a>
-                        </b>
-                      </div>
-                    </div>
-                    <!--.clearfix-->
-                    <p>
-                      <%= post.content %>
-                    </p>
-                    <div class="akitennisclass1926">
-                      <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
-                          <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
-                            <i class="fa fa-clock"></i> <time datetime="2019-06-10T09:33:05+09:00">約3時間前</time>
-                          </span>
-                      </div>
-                    </div>
-                    <div class="akitennisclass1926">
-                      <div class="akitennisclass1766">
-                        <%if Favorite.find_by(user_id:current_user.id,post_id:post.id) then%>
-                          <%= link_to post_remove_favorite_path(post.id,user_id: current_user.id),method: "delete", class: "btn akitennisclass1857 akitennisclass2312" do %>
-                            <i class="fa fa-heart"></i>
-                            取り消し
-                            <span class="badge"><%= Favorite.where(post_id: post.id).count %></span>
-                          <% end %>
-                        <%else%>
-
-                          <%= link_to post_favorite_path(post.id, user_id: current_user.id), class: "btn akitennisclass1857 akitennisclass2312", method: :put do %>
-                            <i class="fa fa-heart"></i>
-                            いいね
-                            <span class="badge"><%= Favorite.where(post_id: post.id).count %></span>
-                          <% end %>
-                        <%end%>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                                ユーザー名</span>
+                </a>
               </div>
             </div>
           <% end %>
         <% end %>
       </div>
       <% if @user.present? %>
-
-    <%= link_to "フォロー一覧", "/user/#{@user.id}/following",class:"btn akitennisclass1316 akitennisclass1620"%>
-        <% end %>
+       <%= link_to "フォロー一覧", "/user/#{@user.id}/following",class:"btn akitennisclass1316 akitennisclass1620"%>
+      <% end %>
     </div>
 
 
@@ -201,17 +160,17 @@
         <small class="akitennisclass1539"><b></b></small>
       </div>
       <div class="akitennisclass1502">
-        <% @posts.each do |post| %>
-          <%= link_to "/post/#{post.id}/show" do %>
+        <% @followed.each do |user| %>
+          <%= link_to "/user/#{user.id}/show" do %>
 
             <div class="akitennisclass1292 akitennisclass2594">
               <div class="akitennisclass1766">
-                <a href="" title="John Isle"><span><img alt="John Isle" class="imageSvg" data-container="body" data-image-svg="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-2-0b4167a2e7ec2facd7b3f3f6ee99f93f.svg" data-image-svgz="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-2-5f187c1b472a9dcd1043a640b66daf18.svgz" data-placement="bottom" data-toggle="tooltip" height="60" show_rank="true" src="https://img.king.mineo.jp/assets/avatars/avatar-m20-2-2-5f187c1b472a9dcd1043a640b66daf18.svgz" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span></a>
+                <a href="" title="John Isle"><span><img alt="John Isle" class="imageSvg" height="60" show_rank="true" src="/assets/1.png" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span></a>
               </div>
               <div class="akitennisclass1764">
                 <a href="" title="John Isle">
                               <span class="label akitennisclass1035" style="margin-right: 5px;">
-                                ユーザー名</span><%= User.find_by(id: post.user_id).name %>
+                                ユーザー名</span><%=user%>
                 </a>
               </div>
             </div>
@@ -219,8 +178,7 @@
         <% end %>
       </div>
       <% if @user.present? %>
-
-    <%= link_to "フォロワー一覧", "/user/#{@user.id}/followed", class:"btn akitennisclass1316 akitennisclass1620"%>
+       <%= link_to "フォロワー一覧", "/user/#{@user.id}/followed", class:"btn akitennisclass1316 akitennisclass1620"%>
       <% end %>
 
     </div>

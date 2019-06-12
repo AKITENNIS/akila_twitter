@@ -18,12 +18,12 @@ class UserController < ApplicationController
 
   def do_follow
     Follow.create!(follow_user_id:current_user.id,followed_user_id:@user.id)
-    render "show"
+    redirect_to controller: :user, action: :index
   end
 
   def remove_follow
     Follow.find_by(follow_user_id:current_user.id,followed_user_id:@user.id).destroy!
-    render "show"
+    redirect_to controller: :user, action: :index
   end
 
 

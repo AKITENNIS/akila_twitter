@@ -1,6 +1,6 @@
 class PostController < ApplicationController
   before_action :authenticate_current_user
-
+  protect_from_forgery :except => [:create]
   def show
     @post=Post.find_by(params[:id])
     render "show"
@@ -17,8 +17,9 @@ class PostController < ApplicationController
 
   def index
     @user = current_user
-
-    @posts=Post.all.follow_post(current_user)
+    @follow = @user.follow
+    @followed = @user.followed
+    @posts=Post.all.follow_post(current_user).order(created_at: "DESC")
     render "index"
   end
 

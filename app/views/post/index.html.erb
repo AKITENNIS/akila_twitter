@@ -9,7 +9,7 @@
     <div id="activities" class="akitennisclass1504">
       <% @posts.each do |post| %>
         <div class="activity-item akitennisclass686" data-activity-id="600114172" id="activity-600114172">
-          <%= link_to "/user/#{post.id}/show" do %>
+          <%= link_to "/post/#{post.id}/show" do %>
 
             <div class="akitennisclass1926">
               <div class="activityBody media">
@@ -24,6 +24,13 @@
                     <%= post.content %>
                   </div>
                 </div>
+                    <div class="akitennisclass1926">
+                      <div class="akitennisclass313 akitennisclass1531 akitennisclass1853">
+                          <span class="akitennisclass1539" data-container="body" data-toggle="tooltip" title="2019/06/10 09:33">
+                              <i class="fa fa-clock"></i> <time datetime="<%= post.created_at %>"><%= time_ago_in_words(post.created_at)+"前" %></time>
+                          </span>
+                      </div>
+                    </div>
                 <div class="akitennisclass1766">
                   <%if Favorite.find_by(user_id:current_user.id,post_id:post.id) then%>
                     <%= link_to post_remove_favorite_path(post.id,user_id: current_user.id),method: "delete", class: "btn akitennisclass1857 akitennisclass2312" do %>
@@ -52,6 +59,7 @@
                               <i class="fa fa-pen"></i>編集
                             <% end %>
                   </div>
+        
                 </div>
               </div>
             </div>

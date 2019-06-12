@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'user/index' => 'user#index'
-  get 'user/:id/do_follow' => 'user#do_follow'
-  get 'user/:id/remove_follow' => 'user#remove_follow'
+  post 'user/:id/do_follow' => 'user#do_follow'
+  post 'user/:id/remove_follow' => 'user#remove_follow'
   get 'user/:id/following' => 'user#following'
   get 'user/:id/followed' => 'user#followed'
   get 'user/:id/show' => 'user#show'
