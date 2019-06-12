@@ -23,9 +23,8 @@ class PostsController < ApplicationController
     render "index"
   end
 
-
   def edit
-    @post=Post.find_by(id:params[:id])
+    @post=Post.find(params[:id])
     render "edit"
   end
 
@@ -41,12 +40,12 @@ class PostsController < ApplicationController
 
   def favorite
     Favorite.create!(user_id:params[:user_id],post_id:params[:id])
-    redirect_to controller: :posts, action: :index
+    redirect_back(fallback_location: root_path)
   end
 
   def remove_favorite
     Favorite.find_by(user_id:params[:user_id],post_id:params[:id]).destroy!
-    redirect_to controller: :posts, action: :index
+    redirect_back(fallback_location: root_path)
   end
 
   def favorite_user

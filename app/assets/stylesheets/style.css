@@ -4994,9 +4994,6 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     overflow: hidden
 }
 
-.akitennisclass1508 {
-    width: 10000px
-}
 
 .media-object {
     display: block
@@ -5014,6 +5011,16 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     display: table-cell;
     vertical-align: top
 }
+.akitennisclass1507{
+    width:100px;
+}
+@media (max-width: 500px) {
+    .akitennisclass1507{
+        width: 70px;
+    }
+
+}
+
 
 .media-middle {
     vertical-align: middle
@@ -28348,4 +28355,7 @@ body .ui-tooltip {
 }
 .title {
     font-size:25px !important;
+}
+.user_post{
+    display:block;
 }

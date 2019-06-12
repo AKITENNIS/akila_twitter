@@ -11,18 +11,14 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-
 </head>
 
 <body>
-
-
 <header class="akitennisclass1741">
   <nav class="akitennisclass1737">
     <div class="container">
       <div class="akitennisclass1926 title">
-        AKI REVO | Twitter
-
+        <%= link_to "AKI REVO | Twitter", "/", class: " title" %>
         <% if current_user %>
           <ul class="akitennisclass1531 akitennisclass2549 akitennisclass1302 akitennisclass1246 akitennisclass1306">
             <li>
@@ -38,7 +34,7 @@
               <% end %>
             </li>
           </ul>
-        <%  else %>
+        <% else %>
           <ul class="akitennisclass1531 akitennisclass2549 akitennisclass1302 akitennisclass1246 akitennisclass1306">
             <li>
               <%= link_to new_registration_path(resource_name) do %>
@@ -53,7 +49,7 @@
               <% end %>
             </li>
             <li>
-              <%= link_to new_session_path(resource_name)do %>
+              <%= link_to new_session_path(resource_name) do %>
                 <span id="labelValidName">
                   <span class="invalid">
                     <i class="fa fa-signal akitennisclass2390"></i>
@@ -66,11 +62,9 @@
             </li>
           </ul>
         <% end %>
-          </div>
+      </div>
     </div>
   </nav>
-
-
   <div class="container">
     <div class="akitennisclass975">
       <div class="akitennisclass1232">
@@ -78,154 +72,135 @@
       </div>
       <div class="akitennisclass810">
         環境構築が要らない新感覚アプリケーション作成講座
-
-
       </div>
     </div>
-    <!--green-project-->
   </div>
 
-
-  <!-- / HAPPY METER -->
-
 </header>
+
 <div class="container" id="mainContent">
   <div class="row">
 
-  <%= yield %>
+    <%= yield %>
     <% if current_user %>
+      <div class="akitennisclass1831">
+        <div class="panel akitennisclass982">
+          <div class="akitennisclass1502">
+            <div class="akitennisclass1291">
+              <%= link_to "マイページ", "/users/#{current_user.id}/show", class: "btn akitennisclass1316 akitennisclass1620" %>
+            </div>
+            <%= link_to "ユーザー一覧", "/users/index", class: "btn akitennisclass1313 akitennisclass1620" %>
 
-  <div class="akitennisclass1831">
-    <div class="panel akitennisclass982">
-      <div class="akitennisclass1502">
-        <div class="akitennisclass1291">
-          <%= link_to "マイページ", "/users/#{current_user.id}/show", class: "btn akitennisclass1316 akitennisclass1620" %>
+            <%= link_to "ログアウトする", "/users/sign_out", class: "btn akitennisclass1313 akitennisclass1620", method: :delete %>
+            <hr>
+            <p class="akitennisclass1302">
+              <b><%= @user.name %></b>さん
+            </p>
+            <p>
+              <%= link_to "users/#{current_user.id}" do %>
+                <span><img class="akitennisclass854 akitennisclass1176 imageSvg" height="220" show_rank="false" src="/assets/<%=@user.avatar %>" title="くろちゃんｄｓ" width="220"></span>
+              <% end %>
+              <br>
+              <% if @user.present? && @user != current_user %>
+                <% if !Follow.find_by(follow_user_id: current_user.id, followed_user_id: @user.id) then %>
+                  <%= link_to "フォローする", "/users/#{@user.id}/do_follow", class: "btn akitennisclass1316 akitennisclass1620" %>
+                <% else %>
+                  <%= link_to "フォローを外す", "/users/#{@user.id}/remove_follow", class: "btn akitennisclass1313 akitennisclass1620" %>
+                <% end %>
+              <% end %>
+            </p>
+          </div>
         </div>
-        <%= link_to "ユーザー一覧", "/users/index", class: "btn akitennisclass1313 akitennisclass1620"%>
-
-        <%= link_to "ログアウトする", "/users/sign_out", class: "btn akitennisclass1313 akitennisclass1620", method: :delete %>
-        <hr>
-        <p class="akitennisclass1302">
-          <b><%= current_user.name %></b>さん
-        </p>
-        <p>
-          <%= link_to "users/#{current_user.id}" do %>
-            <span><img alt="くろちゃんｄｓ" class="akitennisclass854 akitennisclass1176 imageSvg"  height="220" show_rank="false" src="/assets/1.png" title="くろちゃんｄｓ" width="220"></span>
-          <% end %>
-          <br>
-          <% if @user.present? && @user != current_user %>
-          <%if !Follow.find_by(follow_user_id:current_user.id,followed_user_id:@user.id) then%>
-            <%= link_to "フォローする", "/users/#{@user.id}/do_follow", class: "btn akitennisclass1316 akitennisclass1620" %>
-          <%else%>
-            <%= link_to "フォローを外す", "/users/#{@user.id}/remove_follow", class: "btn akitennisclass1313 akitennisclass1620"%>
-            <%end%>
-          <%end%>
-        </p>
-      </div>
-    </div>
 
 
-    <div class="panel akitennisclass982">
-      <div class="akitennisclass987">
-        <b>フォロー</b>
-        <small class="akitennisclass1539"><b></b></small>
-      </div>
-     <div class="akitennisclass1502">
-        <% @follow.each do |user| %>
-          <%= link_to "/user/#{user.id}/show" do %>
-            <div class="akitennisclass1292 akitennisclass2594">
-              <div class="akitennisclass1766">
-                <a href="" title="John Isle"><span><img alt="John Isle" class="imageSvg" height="60" show_rank="true" src="/assets/1.png" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span></a>
-              </div>
-              <div class="akitennisclass1764">
-                <a href="" title="John Isle">
-                              <span class="label akitennisclass1035" style="margin-right: 5px;">
-                                ユーザー名</span>
-                </a>
-              </div>
+        <% if @follow.present? %>
+          <div class="panel akitennisclass982">
+            <div class="akitennisclass987">
+              <b>フォロー</b>
+              <small class="akitennisclass1539"><b></b></small>
             </div>
-          <% end %>
-        <% end %>
-      </div>
-      <% if @user.present? %>
-
-    <%= link_to "フォロー一覧", "/users/#{@user.id}/following",class:"btn akitennisclass1316 akitennisclass1620"%>
-        <% end %>
-    </div>
-
-
-    <div class="panel akitennisclass982">
-      <div class="akitennisclass987">
-        <b>フォロワー</b>
-        <small class="akitennisclass1539"><b></b></small>
-      </div>
-      <div class="akitennisclass1502">
-        <% @posts.each do |post| %>
-          <%= link_to "/posts/#{post.id}/show" do %>
-
-            <div class="akitennisclass1292 akitennisclass2594">
-              <div class="akitennisclass1766">
-                <a href="" title="John Isle"><span><img alt="John Isle" class="imageSvg" height="60" show_rank="true" src="/assets/1.png" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span></a>
-              </div>
-              <div class="akitennisclass1764">
-                <a href="" title="John Isle">
-                              <span class="label akitennisclass1035" style="margin-right: 5px;">
-                                ユーザー名</span><%=user%>
-                </a>
-              </div>
+            <div class="akitennisclass1502">
+              <% @follow.each do |f| %>
+                <div class="akitennisclass1292 akitennisclass2594">
+                  <div class="akitennisclass1766">
+                    <%= link_to "/users/#{f.followed_user.id}/show" do %>
+                      <span><img alt="John Isle" class="imageSvg" height="60" show_rank="true" src="/assets/<%= User.find(f.followed_user_id).avatar %>" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span>
+                    <% end %>
+                  </div>
+                  <div class="akitennisclass1764">
+                    <%= link_to "/users/#{f.followed_user.id}/show" do %>
+                      <span class="label akitennisclass1035" style="margin-right: 5px;">ユーザー名<%= f.followed_user.name %></span>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+            <%= link_to "フォロー一覧", "/users/#{@user.id}/following", class: "btn akitennisclass1316 akitennisclass1620" %>
+          </div>
+        <% end %>
+
+        <% if @followed.present? %>
+          <div class="panel akitennisclass982">
+            <div class="akitennisclass987">
+              <b>フォロワー</b>
+              <small class="akitennisclass1539"><b></b></small>
+            </div>
+            <div class="akitennisclass1502">
+              <% @followed.each do |f| %>
+                <div class="akitennisclass1292 akitennisclass2594">
+                  <div class="akitennisclass1766">
+                    <%= link_to "/users/#{f.follow_user.id}/show" do %>
+                      <span><img alt="John Isle" class="imageSvg" height="60" show_rank="true" src="/assets/<%= User.find(f.follow_user_id).avatar %>" title="John Isle" width="60"></span><span class="label akitennisclass1174 akitennisclass1284"></span>
+                    <% end %>
+                  </div>
+                  <div class="akitennisclass1764">
+                    <%= link_to "/users/#{f.follow_user.id}/show" do %>
+                      <span class="label akitennisclass1035" style="margin-right: 5px;">ユーザー名<%= f.follow_user.name %></span>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <%= link_to "フォロワー一覧", "/users/#{@user.id}/followed", class: "btn akitennisclass1316 akitennisclass1620" %>
+          </div>
         <% end %>
       </div>
-      <% if @user.present? %>
-
-    <%= link_to "フォロワー一覧", "/users/#{@user.id}/followed", class:"btn akitennisclass1316 akitennisclass1620"%>
-      <% end %>
-
-    </div>
-  </div>
     <% end %>
-
   </div>
+</div>
 
-    </div>
-  <footer class="akitennisclass1247 akitennisclass2481" role="contentinfo">
-    <div class="container">
-      <div class="row">
-        <div class="akitennisclass1826 text-md-left">
+<footer class="akitennisclass1247 akitennisclass2481" role="contentinfo">
+  <div class="container">
+    <div class="row">
+      <div class="akitennisclass1826 text-md-left">
 
-        </div>
-        <div class="akitennisclass1677 text-md-left align-self-center">
-          <ul class="akitennisclass1306 akitennisclass2520">
-            <li class="list-inline-item">
-              <a href="https://www.facebook.com" target="_blank"><img alt="Icon footer facebook" height="28" src="/assets/facebook.svg"></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="53455">
-              </a><a href="https://twitter.com" target="_blank"><img alt="Icon footer twitter" height="28" src="/assets/twitter.svg"></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="53455">
-              </a><a href="https://www.youtube.com" target="_blank"><img alt="Icon footer youtube" height="28" src="/assets/youtube.svg"></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="53455">
-              </a><a href="https://line.me" target="_blank"><img alt="Icon footer line" height="20" src="/assets/line.png"></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="53455">
-              </a><a href="https://www.instagram.com" target="_blank"><img alt="Icon footer instagram" height="28" src="/assets/instagram.svg"></a>
-            </li>
-          </ul>
-        </div>
       </div>
-      <div class="akitennisclass1302 akitennisclass2320">© AKI REVO</div>
-
-
+      <div class="akitennisclass1677 text-md-left align-self-center">
+        <ul class="akitennisclass1306 akitennisclass2520">
+          <li class="list-inline-item">
+            <a href="https://www.facebook.com" target="_blank"><img alt="Icon footer facebook" height="28" src="/assets/facebook.svg"></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="53455">
+            </a><a href="https://twitter.com" target="_blank"><img alt="Icon footer twitter" height="28" src="/assets/twitter.svg"></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="53455">
+            </a><a href="https://www.youtube.com" target="_blank"><img alt="Icon footer youtube" height="28" src="/assets/youtube.svg"></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="53455">
+            </a><a href="https://line.me" target="_blank"><img alt="Icon footer line" height="20" src="/assets/line.png"></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="53455">
+            </a><a href="https://www.instagram.com" target="_blank"><img alt="Icon footer instagram" height="28" src="/assets/instagram.svg"></a>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <!--.container-->
-
-  </footer>
+    <div class="akitennisclass1302 akitennisclass2320">© AKI REVO</div>
+  </div>
+</footer>
 </body>
 </html>

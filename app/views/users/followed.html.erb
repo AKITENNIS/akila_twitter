@@ -1,7 +1,25 @@
-<p><%=@user.name%>さんのフォロワー一覧</p>
-<%@user.followed.each do |list|%>
-  <%=list.follow_user.name%>
-<%end%>
-<br><br>
-<%= link_to "ユーザーに戻る", "/users/#{@user.id}/show"%> <br>
-<%= link_to "投稿一覧", "/posts/index"%>
+
+<div class="akitennisclass1847" role="main">
+  <h1 class="akitennisclass1137">フォロワー一覧</h1>
+  <p>あなたをフォローしてるユーザーが見れます！</p>
+  <% @followed.each do |f| %>
+    <div class="akitennisclass1831">
+      <div class="panel akitennisclass982">
+        <div class="akitennisclass1502">
+          <div class="akitennisclass1291">
+            <%= link_to f.follow_user.name, "/users/#{f.follow_user.id}/show", class: "btn akitennisclass1316 akitennisclass1620" %>
+          </div>
+          <hr>
+          <p>
+
+            <span>
+              <img alt="くろちゃんｄｓ" class="akitennisclass854 akitennisclass1176 imageSvg" height="220" show_rank="false" src="/assets/1.png" title="くろちゃんｄｓ" width="220">
+              </span>
+            <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>

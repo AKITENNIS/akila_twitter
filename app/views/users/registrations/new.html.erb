@@ -26,7 +26,7 @@
           パスワード</label>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
+        <% end %><br/>
         <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "akitennisclass1200", id: "user_password" %>
       </div>
       <div class="akitennisclass1526">
@@ -34,13 +34,71 @@
           確認用パスワード</label>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
+        <% end %><br/>
         <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "new-password", class: "akitennisclass1200", id: "user_password" %>
+      </div>
+      <div class="akitennisclass2348">
+        <label class="akitennisclass1063" for="user_email"><span class="label akitennisclass1172">必須</span>
+          アバター画像</label>
+        <div class="row presetImages">
+          <div class="akitennisclass1822 akitennisclass1825 akitennisclass1302 akitennisclass1823">
+            <p>
+              <img class="akitennisclass854 labelImage imageSvg"src="/assets/1.png">
+              <label for="user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1">
+                <%=f.radio_button :avatar, "1.png", id:"user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1"%>
+              </label>
+            </p>
+          </div>
+          <div class="akitennisclass1822 akitennisclass1825 akitennisclass1302 akitennisclass1823">
+            <p>
+              <img class="akitennisclass854 labelImage imageSvg"src="/assets/2.png">
+              <label for="user_sns_profile_attributes_preset_badge_image_avatar-m20-1-2">
+                <%=f.radio_button :avatar, "2.png", id:"user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1"%>
+              </label>
+            </p>
+          </div>
+
+          <div class="akitennisclass1822 akitennisclass1825 akitennisclass1302 akitennisclass1823">
+            <p>
+              <img class="akitennisclass854 labelImage imageSvg"src="/assets/3.png">
+              <label for="user_sns_profile_attributes_preset_badge_image_avatar-m20-2-1">
+                <%=f.radio_button :avatar, "3.png", id:"user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1"%>
+              </label>
+            </p>
+          </div>
+          <div class="akitennisclass1822 akitennisclass1825 akitennisclass1302 akitennisclass1823">
+            <p>
+              <img class="akitennisclass854 labelImage imageSvg"src="/assets/4.png">
+              <label for="user_sns_profile_attributes_preset_badge_image_avatar-m20-2-2">
+                <%=f.radio_button :avatar, "4.png", id:"user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1"%>
+              </label>
+            </p>
+          </div>
+
+          <div class="akitennisclass1822 akitennisclass1825 akitennisclass1302 akitennisclass1823">
+            <p>
+              <img class="akitennisclass854 labelImage imageSvg"src="/assets/5.png">
+              <label for="user_sns_profile_attributes_preset_badge_image_avatar-m20-3-1">
+                <%=f.radio_button :avatar, "5.png", id:"user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1"%>
+              </label>
+            </p>
+          </div>
+          <div class="akitennisclass1822 akitennisclass1825 akitennisclass1302 akitennisclass1823">
+            <p>
+              <img class="akitennisclass854 labelImage imageSvg"src="/assets/6.png">
+              <label for="user_sns_profile_attributes_preset_badge_image_avatar-m20-3-2">
+                <%=f.radio_button :avatar, "6.png", id:"user_sns_profile_attributes_preset_badge_image_avatar-m20-1-1"%>
+              </label>
+            </p>
+          </div>
+
+        </div>
       </div>
       <hr>
 
+      <div class="akitennisclass1526">
 
-      <div class="akitennisclass2348">
+
         <div class="row">
           <div class="akitennisclass1831 col-md-offset-2 akitennisclass1837">
             <%= link_to "既に登録済みの方はこちら", new_session_path(resource_name), class: "btn akitennisclass1313 akitennisclass1620" %>
@@ -51,6 +109,7 @@
           </div>
         </div>
       </div>
+      <
     <% end %>
 
   </div>

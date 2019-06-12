@@ -1,51 +1,51 @@
 <div class="akitennisclass1847" role="main">
 
-<% if @user == current_user %>
-  <h1 class="akitennisclass1137">マイページ</h1>
-  <p>あなたのすべての投稿が見れます！</p>
+  <% if @user == current_user %>
+    <h1 class="akitennisclass1137">マイページ</h1>
+    <p>あなたのすべての投稿が見れます！</p>
 
-  <!-- MainContent -->
-  <%= form_tag("/post/create", method: :post, class: "new_content_comment", id: "comment_form") do %>
+    <!-- MainContent -->
+    <%= form_tag("/post/create", method: :post, class: "new_content_comment", id: "comment_form") do %>
 
-    <div style="display:none">
-      <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k0tPgtHEk5ruAunyEF/65Dfh/LCXhgYs77fMPOnXGes=">
-    </div>
-    <div class="panel akitennisclass982">
-      <div class="akitennisclass987">
-        <ul class="akitennisclass1306 akitennisclass1290">
-          <li>
-            <span class="label akitennisclass1036">どんどんつぶやこう！！</span>
-          </li>
-
-        </ul>
+      <div style="display:none">
+        <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="k0tPgtHEk5ruAunyEF/65Dfh/LCXhgYs77fMPOnXGes=">
       </div>
-      <div class="akitennisclass1502">
-        <div class="uploadedImage">
+      <div class="panel akitennisclass982">
+        <div class="akitennisclass987">
+          <ul class="akitennisclass1306 akitennisclass1290">
+            <li>
+              <span class="label akitennisclass1036">どんどんつぶやこう！！</span>
+            </li>
 
+          </ul>
         </div>
-        <div class="uploadedVideo">
+        <div class="akitennisclass1502">
+          <div class="uploadedImage">
 
-        </div>
-        <div class="uploadedTwitter"></div>
-        <div class="uploadedFacebook"></div>
+          </div>
+          <div class="uploadedVideo">
+
+          </div>
+          <div class="uploadedTwitter"></div>
+          <div class="uploadedFacebook"></div>
 
 
-        <p>
-          <%= text_field_tag :content, "", class: "autoResizeable charCountable akitennisclass1200", id: "content_comment_body", style: "min-height: 3em; max-height: 250px; overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 66px;" %>
-        </p>
-        <div class="akitennisclass1926">
-          <p class="akitennisclass1539 akitennisclass1766 akitennisclass2320">たったの<b class="charCounterLimit">２０分</b>で<span class="akitennisclass1238"><b class="charCounter">ツイッターアプリ</b></span>ができる！！
+          <p>
+            <%= text_field_tag :content, "", class: "autoResizeable charCountable akitennisclass1200", id: "content_comment_body", style: "min-height: 3em; max-height: 250px; overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 66px;" %>
           </p>
-          <%= submit_tag "つぶやく", class: "btn akitennisclass1316 akitennisclass1531 gaEventTrackableWithConfirm aaEventTrackableWithConfirm" %>
+          <div class="akitennisclass1926">
+            <p class="akitennisclass1539 akitennisclass1766 akitennisclass2320">たったの<b class="charCounterLimit">２０分</b>で<span class="akitennisclass1238"><b class="charCounter">ツイッターアプリ</b></span>ができる！！
+            </p>
+            <%= submit_tag "つぶやく", class: "btn akitennisclass1316 akitennisclass1531 gaEventTrackableWithConfirm aaEventTrackableWithConfirm" %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
   <% else %>
     <h1 class="akitennisclass1137"><%= @user.name %>さんのページ</h1>
     <p><%= @user.name %>さんのすべての投稿が見れます！</p>
 
-<% end %>
+  <% end %>
 
   <div class="panel akitennisclass982">
     <!-- activities -->
